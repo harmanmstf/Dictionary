@@ -52,6 +52,14 @@ class WordFragment : Fragment() {
                 Resource.Status.SUCCESS -> {
                     it.data?.let { d ->
                         binding.tvWord.text =d.first().word
+                        binding.tvPhoneticText.text = d.first().phonetics.joinToString("\n") {
+                            it.text
+                        }
+                        binding.tvPartOfSpeech.text = d.first().meanings.joinToString("\n" ) { it.partOfSpeech }
+                        binding.tvDefinition.text = d.first().meanings.joinToString("\n") {it.definitions.first().definition }
+                        binding.tvExample.text = d.first().meanings.joinToString("\n") { it.definitions.first().example }
+
+
                         binding.pbData.isVisible = false
                     }
                 }

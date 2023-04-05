@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.word.WordFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:scrollbars="vertical">
 
 
     <EditText
@@ -27,15 +28,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="word"
+        android:textSize="24sp"
         android:gravity="center"/>
 
     <TextView
-
-        android:id="@+id/tvPhonetic"
+        android:id="@+id/tvPhoneticText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="phonetic"/>
+
+
+
+    <TextView
+        android:id="@+id/tvPartOfSpeech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="part of speech"/>
+
+    <TextView
+        android:id="@+id/tvDefinition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="definition"/>
+
+    <TextView
+        android:id="@+id/tvExample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="example"/>
+
+    <TextView
+        android:id="@+id/tvSynonyms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="synonyms"/>
+
+    <TextView
+        android:id="@+id/tvAntonyms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="antonyms"/>
 
     <ProgressBar
         android:id="@+id/pbData"
