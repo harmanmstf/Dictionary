@@ -17,7 +17,6 @@ fun <T> performGetOperation(
         emit(Resource.loading())
 
 
-
         val responseStatus = networkCall.invoke()
         if (responseStatus.status == SUCCESS) {
 

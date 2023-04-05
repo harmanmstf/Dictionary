@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.dictionary.R
+import androidx.core.view.isVisible
 import com.example.dictionary.databinding.FragmentWordBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
@@ -42,23 +42,28 @@ class WordFragment : Fragment() {
         setupObservers()
 
         binding.btnSearch.setOnClickListener {
-          viewModel.start(word = binding.etSearch.text.toString())
+          viewModel.search(word = binding.etSearch.text.toString())
         }
     }
 
     private fun setupObservers() {
-        viewModel.results?.observe(viewLifecycleOwner, Observer {
+        viewModel.results.observe(viewLifecycleOwner, Observer {
             when (it.status){
                 Resource.Status.SUCCESS -> {
                     it.data?.let { d ->
-                        binding.tvWord.text =d.word
-                        binding.tvPhonetic.text =d.phonetic
+                        binding.tvWord.text =d.first().word
+                        binding.pbData.isVisible = false
                     }
                 }
+                Resource.Status.LOADING -> binding.pbData.isVisible = true
                 Resource.Status.ERROR -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                Resource.Status.LOADING -> { }
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

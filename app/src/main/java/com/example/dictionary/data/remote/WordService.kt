@@ -7,5 +7,5 @@ import retrofit2.http.Path
 
 interface  WordService{
     @GET("entries/en/{word}")
-    suspend fun getWord(@Path("word") word: String): Response<WordModel>
+    suspend fun getWord(@Path("word") word: String): Response<List<WordModel>>
 }

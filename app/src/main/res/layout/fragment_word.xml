@@ -11,7 +11,8 @@
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search"/>
+        android:hint="Search"
+        android:inputType="text"/>
 
     <Button
         android:id="@+id/btnSearch"
@@ -35,5 +36,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="phonetic"/>
+
+    <ProgressBar
+        android:id="@+id/pbData"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </LinearLayout>
