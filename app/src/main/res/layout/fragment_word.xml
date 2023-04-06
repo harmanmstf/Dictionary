@@ -39,28 +39,6 @@
         tools:text="phonetic"/>
 
 
-
-    <TextView
-        android:id="@+id/tvPartOfSpeech"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="part of speech"/>
-
-    <TextView
-        android:id="@+id/tvDefinition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="definition"/>
-
-    <TextView
-        android:id="@+id/tvExample"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="example"/>
-
     <TextView
         android:id="@+id/tvSynonyms"
         android:layout_width="match_parent"
@@ -81,5 +59,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDefinition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

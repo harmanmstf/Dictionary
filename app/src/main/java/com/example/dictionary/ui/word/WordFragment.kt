@@ -11,6 +11,7 @@ import com.example.dictionary.databinding.FragmentWordBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dictionary.utils.Resource
 
 @AndroidEntryPoint
@@ -18,9 +19,8 @@ class WordFragment : Fragment() {
 
     private var _binding: FragmentWordBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: WordViewModel by viewModels()
-
+    private lateinit var adapter: WordAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +40,17 @@ class WordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
+        setupRecyclerView()
+
 
         binding.btnSearch.setOnClickListener {
           viewModel.search(word = binding.etSearch.text.toString())
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvDefinition.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvDefinition.adapter = adapter
     }
 
     private fun setupObservers() {
@@ -55,9 +62,7 @@ class WordFragment : Fragment() {
                         binding.tvPhoneticText.text = d.first().phonetics.joinToString("\n") {
                             it.text
                         }
-                        binding.tvPartOfSpeech.text = d.first().meanings.joinToString("\n" ) { it.partOfSpeech }
-                        binding.tvDefinition.text = d.first().meanings.joinToString("\n") {it.definitions.first().definition }
-                        binding.tvExample.text = d.first().meanings.joinToString("\n") { it.definitions.first().example }
+
 
 
                         binding.pbData.isVisible = false
