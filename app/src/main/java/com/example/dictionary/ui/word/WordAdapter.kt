@@ -39,8 +39,8 @@ class WordViewHolder(private val itemBinding: WordItemBinding) : RecyclerView.Vi
     fun bind(item: MeaningsModel) {
         this.word = item
         itemBinding.tvPartOfSpeech.text = item.partOfSpeech
-        itemBinding.tvDefinition.text = item.definitions.first().definition
-        itemBinding.tvExample.text = item.definitions.first().example
+        itemBinding.tvDefinition.text = item.definitions.joinToString("\n") { it.definition }
+
 
     }
 

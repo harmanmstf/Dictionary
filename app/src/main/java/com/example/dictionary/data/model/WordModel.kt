@@ -9,18 +9,14 @@ data class WordModel(
 
 data class PhoneticsModel(
     val text: String,
-    val audio: String
 )
 
 data class  MeaningsModel(
     val partOfSpeech: String,
-    val definitions: List<DefinitionsModel>,
-    val synonyms: List<String>,
-    val antonyms: List<String>
+    val definitions: List<DefinitionsModel>
 )
 
 data class DefinitionsModel(
-    val definition: String,
-    val example: String
+    val definition: String
 )
 

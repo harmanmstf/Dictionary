@@ -39,19 +39,7 @@
         tools:text="phonetic"/>
 
 
-    <TextView
-        android:id="@+id/tvSynonyms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="synonyms"/>
 
-    <TextView
-        android:id="@+id/tvAntonyms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="antonyms"/>
 
     <ProgressBar
         android:id="@+id/pbData"
@@ -63,7 +51,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDefinition"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         />
 
 </LinearLayout>

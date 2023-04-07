@@ -49,29 +49,36 @@ class WordFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+        adapter = WordAdapter()
         binding.rvDefinition.layoutManager = LinearLayoutManager(requireContext())
         binding.rvDefinition.adapter = adapter
+
     }
 
     private fun setupObservers() {
-        viewModel.results.observe(viewLifecycleOwner, Observer {
-            when (it.status){
+        viewModel.results.observe(viewLifecycleOwner) { it ->
+            when (it.status) {
                 Resource.Status.SUCCESS -> {
                     it.data?.let { d ->
-                        binding.tvWord.text =d.first().word
+                        binding.tvWord.text = d.first().word
                         binding.tvPhoneticText.text = d.first().phonetics.joinToString("\n") {
                             it.text
                         }
+                        adapter.setItems(ArrayList(it.data.map { it.meanings }.flatten()))
+
 
 
 
                         binding.pbData.isVisible = false
                     }
+
                 }
                 Resource.Status.LOADING -> binding.pbData.isVisible = true
-                Resource.Status.ERROR -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                Resource.Status.ERROR -> Toast.makeText(requireContext(),
+                    it.message,
+                    Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 
     override fun onDestroyView() {
