@@ -66,9 +66,6 @@ class WordFragment : Fragment() {
                         }
                         adapter.setItems(ArrayList(it.data.map { it.meanings }.flatten()))
 
-
-
-
                         binding.pbData.isVisible = false
                     }
 

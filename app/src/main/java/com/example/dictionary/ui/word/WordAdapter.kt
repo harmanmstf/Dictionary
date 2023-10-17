@@ -2,10 +2,8 @@ package com.example.dictionary.ui.word
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dictionary.data.model.DefinitionsModel
 import com.example.dictionary.data.model.MeaningsModel
 import com.example.dictionary.databinding.WordItemBinding
 

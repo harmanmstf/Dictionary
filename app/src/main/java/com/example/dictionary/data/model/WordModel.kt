@@ -4,7 +4,6 @@ data class WordModel(
     val word: String,
     val phonetics: List<PhoneticsModel>,
     val meanings: List<MeaningsModel>
-
 )
 
 data class PhoneticsModel(

@@ -24,6 +24,5 @@ fun <T> performGetOperation(
 
         } else if (responseStatus.status == ERROR) {
             emit(Resource.error(responseStatus.message!!))
-
         }
     }
