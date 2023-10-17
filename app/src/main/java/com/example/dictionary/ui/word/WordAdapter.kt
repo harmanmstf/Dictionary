@@ -3,13 +3,17 @@ package com.example.dictionary.ui.word
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.data.model.MeaningsModel
 import com.example.dictionary.databinding.WordItemBinding
+import com.example.dictionary.ui.searchedwords.SearchedWordsAdapter
 
 class WordAdapter(): RecyclerView.Adapter<WordViewHolder>() {
 
     private val items = ArrayList<MeaningsModel>()
+
 
     fun setItems(items: ArrayList<MeaningsModel>) {
         this.items.clear()
@@ -37,7 +41,13 @@ class WordViewHolder(private val itemBinding: WordItemBinding) : RecyclerView.Vi
     fun bind(item: MeaningsModel) {
         this.word = item
         itemBinding.tvPartOfSpeech.text = item.partOfSpeech
-        itemBinding.tvDefinition.text = item.definitions.joinToString("\n") { it.definition }
+        val definitionAdapter = DefinitionAdapter()
+        definitionAdapter.submitList(item.definitions)
+        val context = itemBinding.root.context
+        itemBinding.rvDefinition.layoutManager = LinearLayoutManager(context)
+        itemBinding.rvDefinition.adapter = definitionAdapter
+
+       // itemBinding.tvDefinition.text = item.definitions.joinToString("\n") { it.definition }
 
 
     }

@@ -20,7 +20,8 @@ data class  MeaningsModel(
 )
 
 data class DefinitionsModel(
-    val definition: String
+    val definition: String,
+    val example: String
 )
 
 @Entity(tableName = "searchedWords")
