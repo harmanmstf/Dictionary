@@ -11,7 +11,9 @@ import com.example.dictionary.databinding.FragmentWordBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.dictionary.R
 import com.example.dictionary.utils.Resource
 
 @AndroidEntryPoint
@@ -46,6 +48,10 @@ class WordFragment : Fragment() {
         binding.btnSearch.setOnClickListener {
           viewModel.search(word = binding.etSearch.text.toString())
         }
+
+        binding.btnSearchedWords.setOnClickListener {
+            findNavController().navigate(R.id.action_wordFragment_to_searchedWordsFragment)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -59,21 +65,27 @@ class WordFragment : Fragment() {
         viewModel.results.observe(viewLifecycleOwner) { it ->
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    it.data?.let { d ->
-                        binding.tvWord.text = d.first().word
-                        binding.tvPhoneticText.text = d.first().phonetics.joinToString("\n") {
+                    it.data?.let { word ->
+                        binding.tvWord.text = word.first().word
+                        binding.tvPhoneticText.text = word.first().phonetics.joinToString("\n") {
                             it.text
                         }
                         adapter.setItems(ArrayList(it.data.map { it.meanings }.flatten()))
 
                         binding.pbData.isVisible = false
-                    }
 
+                        viewModel.saveWord(word.first().word)
+                    }
                 }
                 Resource.Status.LOADING -> binding.pbData.isVisible = true
-                Resource.Status.ERROR -> Toast.makeText(requireContext(),
-                    it.message,
-                    Toast.LENGTH_SHORT).show()
+                Resource.Status.ERROR -> {
+                    Toast.makeText(
+                        requireContext(),
+                        it.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    binding.pbData.isVisible = false
+                }
             }
         }
     }
@@ -82,6 +94,4 @@ class WordFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

@@ -41,6 +41,5 @@ class WordViewHolder(private val itemBinding: WordItemBinding) : RecyclerView.Vi
 
 
     }
-
 }
 

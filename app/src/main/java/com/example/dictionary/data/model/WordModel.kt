@@ -1,5 +1,9 @@
 package com.example.dictionary.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
 data class WordModel(
     val word: String,
     val phonetics: List<PhoneticsModel>,
@@ -18,4 +22,11 @@ data class  MeaningsModel(
 data class DefinitionsModel(
     val definition: String
 )
+
+@Entity(tableName = "searchedWords")
+data class SearchedWord(
+    @PrimaryKey
+    val searchedWord: String
+)
+
 
