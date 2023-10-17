@@ -3,20 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/wordFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/wordFragment"
-        android:name="com.example.dictionary.ui.word.WordFragment"
-        android:label="fragment_word"
-        tools:layout="@layout/fragment_word" >
-        <action
-            android:id="@+id/action_wordFragment_to_searchedWordsFragment"
-            app:destination="@id/searchedWordsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchedWordsFragment"
-        android:name="com.example.dictionary.ui.searchedwords.SearchedWordsFragment"
-        android:label="fragment_searched_words"
-        tools:layout="@layout/fragment_searched_words" />
+        android:id="@+id/homeFragment"
+        android:name="com.example.dictionary.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>

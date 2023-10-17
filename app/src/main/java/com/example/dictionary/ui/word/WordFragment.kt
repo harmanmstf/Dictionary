@@ -48,10 +48,6 @@ class WordFragment : Fragment() {
         binding.btnSearch.setOnClickListener {
           viewModel.search(word = binding.etSearch.text.toString())
         }
-
-        binding.btnSearchedWords.setOnClickListener {
-            findNavController().navigate(R.id.action_wordFragment_to_searchedWordsFragment)
-        }
     }
 
     private fun setupRecyclerView() {

@@ -22,12 +22,6 @@
         android:text="SEARCH"
         />
 
-    <Button
-        android:id="@+id/btnSearchedWords"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SEARCHED WORDS"
-        />
 
 
     <TextView
