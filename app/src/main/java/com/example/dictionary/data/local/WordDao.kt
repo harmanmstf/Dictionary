@@ -16,5 +16,4 @@ interface WordDao {
 
     @Query("SELECT * FROM searchedWords")
     fun getWords(): LiveData<List<SearchedWord>>
-
 }

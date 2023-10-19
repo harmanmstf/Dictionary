@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
             when (position) {
                 0 -> tab.text = "Search"
                 1 -> tab.text = "Study"
+                2 -> tab.text = "Play"
 
             }
         }.attach()

@@ -12,8 +12,10 @@ import com.example.dictionary.R
 import com.example.dictionary.databinding.FragmentSearchedWordsBinding
 import com.example.dictionary.ui.word.WordAdapter
 import com.example.dictionary.ui.word.WordViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class SearchedWordsFragment : Fragment() {
 
     private var _binding: FragmentSearchedWordsBinding? = null
