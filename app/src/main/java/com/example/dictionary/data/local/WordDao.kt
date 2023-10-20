@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.dictionary.data.model.SearchedWord
-import com.example.dictionary.data.model.WordModel
 
 @Dao
 interface WordDao {

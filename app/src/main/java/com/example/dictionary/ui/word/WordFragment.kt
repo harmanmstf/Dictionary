@@ -1,19 +1,19 @@
 package com.example.dictionary.ui.word
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.dictionary.databinding.FragmentWordBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dictionary.R
 import com.example.dictionary.utils.Resource
 
 @AndroidEntryPoint
@@ -34,7 +34,7 @@ class WordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentWordBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,7 +46,8 @@ class WordFragment : Fragment() {
 
 
         binding.btnSearch.setOnClickListener {
-          viewModel.search(word = binding.etSearch.text.toString())
+            viewModel.search(word = binding.etSearch.text.toString())
+            hideSoftInput()
         }
     }
 
@@ -63,9 +64,8 @@ class WordFragment : Fragment() {
                 Resource.Status.SUCCESS -> {
                     it.data?.let { word ->
                         binding.tvWord.text = word.first().word
-                        binding.tvPhoneticText.text = word.first().phonetics.joinToString("\n") {
-                            it.text
-                        }
+                        binding.tvPhoneticText.text = word.first().phonetics
+                            .joinToString("\n") { it.text ?: "" }
                         adapter.setItems(ArrayList(it.data.map { it.meanings }.flatten()))
 
                         binding.pbData.isVisible = false
@@ -73,6 +73,7 @@ class WordFragment : Fragment() {
                         viewModel.saveWord(word.first().word)
                     }
                 }
+
                 Resource.Status.LOADING -> binding.pbData.isVisible = true
                 Resource.Status.ERROR -> {
                     Toast.makeText(
@@ -85,6 +86,18 @@ class WordFragment : Fragment() {
             }
         }
     }
+
+    @SuppressLint("ServiceCast")
+    fun Fragment.hideSoftInput() {
+        val view: View? = view
+        if (view != null) {
+            val inputMethodManager =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+
+            inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

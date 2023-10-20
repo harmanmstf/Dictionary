@@ -18,4 +18,8 @@
     <string name="a2">A2</string>
     <string name="b1">B1</string>
     <string name="b2">B2</string>
+    <string name="search">Search</string>
+    <string name="scrambledWord">ScrambledWord</string>
+    <string name="study">Study</string>
+    <string name="play">Play</string>
 </resources>

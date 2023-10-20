@@ -1,5 +1,6 @@
 package com.example.dictionary.ui.game
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,16 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.dictionary.R
+import com.example.dictionary.data.local.MAX_NO_OF_WORDS
 import com.example.dictionary.databinding.FragmentGameBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Fragment where the game is played, contains the game logic.
- */
 @AndroidEntryPoint
 class GameFragment : Fragment() {
 
@@ -32,16 +31,17 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         viewModel.score.observe(viewLifecycleOwner) { score ->
-            binding.score.text = "Score: ${score}"
+            binding.score.text = "Score: $score"
         }
 
         viewModel.currentWordCount.observe(viewLifecycleOwner) { currentWordCount ->
-            binding.wordCount.text = " ${currentWordCount}of ${10} words"
+            binding.wordCount.text = " $currentWordCount of $MAX_NO_OF_WORDS words"
 
         }
 
@@ -52,7 +52,9 @@ class GameFragment : Fragment() {
 
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
-        if (viewModel.isGameOver()) { showFinalScoreDialog() }
+        if (viewModel.isGameOver()) {
+            showFinalScoreDialog()
+        }
 
         viewModel.getNextWord()
     }
@@ -80,17 +82,16 @@ class GameFragment : Fragment() {
     }
 
 
-
     private var scoreDialog: AlertDialog? = null
 
     private fun showFinalScoreDialog() {
         val scoreObserver = Observer<Int> { score ->
-            scoreDialog =  MaterialAlertDialogBuilder(requireContext())
+            scoreDialog = MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.congratulations))
                 .setMessage(getString(R.string.you_scored, score))
                 .setCancelable(false)
                 .setNegativeButton(getString(R.string.exit)) { _, _ ->
-                    exitGame()
+                    findNavController().popBackStack()
                 }
                 .setPositiveButton(getString(R.string.play_again)) { _, _ ->
                     restartGame()
@@ -102,26 +103,12 @@ class GameFragment : Fragment() {
         viewModel.score.observe(viewLifecycleOwner, scoreObserver)
     }
 
-
-    /*
-     * Re-initializes the data in the ViewModel and updates the views with the new data, to
-     * restart the game.
-     */
     private fun restartGame() {
         viewModel.reinitializeData()
         setErrorTextField(false)
     }
 
-    /*
-     * Exits the game.
-     */
-    private fun exitGame() {
-        activity?.finish()
-    }
 
-    /*
-    * Sets and resets the text field error status.
-    */
     private fun setErrorTextField(error: Boolean) {
         if (error) {
             binding.textField.isErrorEnabled = true

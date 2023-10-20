@@ -3,7 +3,6 @@ package com.example.dictionary.data.repository
 import androidx.lifecycle.LiveData
 import com.example.dictionary.data.local.WordDao
 import com.example.dictionary.data.model.SearchedWord
-import com.example.dictionary.data.model.WordModel
 import com.example.dictionary.data.remote.WordRemoteDataSource
 import com.example.dictionary.utils.performGetOperation
 import javax.inject.Inject

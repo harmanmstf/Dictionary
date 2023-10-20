@@ -1,20 +1,16 @@
 package com.example.dictionary.ui.word
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dictionary.data.model.DefinitionsModel
-import com.example.dictionary.data.model.SearchedWord
 import com.example.dictionary.databinding.DefinitionItemBinding
-import com.example.dictionary.databinding.SearchedWordItemBinding
 
 
-class DefinitionAdapter(
-) : ListAdapter<DefinitionsModel, DefinitionAdapter.DefinitionViewHolder>(
+class DefinitionAdapter: ListAdapter<DefinitionsModel, DefinitionAdapter.DefinitionViewHolder>(
     DefinitionDiffCallback()
 ) {
 
@@ -35,10 +31,8 @@ class DefinitionAdapter(
 
         @SuppressLint("SetTextI18n")
         fun bind(item: DefinitionsModel) {
-            binding.tvDefinition.text = "definition: ${item.definition}"
-            binding.tvExample.text = "example: ${item.example}"
-
-
+            binding.tvDefinition.text = item.definition
+            binding.tvExample.text = item.example ?: ""
 
         }
     }

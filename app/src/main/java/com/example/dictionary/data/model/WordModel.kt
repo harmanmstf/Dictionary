@@ -11,7 +11,7 @@ data class WordModel(
 )
 
 data class PhoneticsModel(
-    val text: String,
+    val text: String?,
 )
 
 data class  MeaningsModel(
@@ -21,7 +21,7 @@ data class  MeaningsModel(
 
 data class DefinitionsModel(
     val definition: String,
-    val example: String
+    val example: String?
 )
 
 @Entity(tableName = "searchedWords")

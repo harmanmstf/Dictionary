@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dictionary.R
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dictionary.databinding.FragmentSearchedWordsBinding
-import com.example.dictionary.ui.word.WordAdapter
 import com.example.dictionary.ui.word.WordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +23,7 @@ class SearchedWordsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchedWordsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,8 +37,11 @@ class SearchedWordsFragment : Fragment() {
 
 
     private fun setupRecyclerView() {
+        val numberOfColumns = 2
         adapter = SearchedWordsAdapter { }
-        binding.rvSearchedWord.layoutManager = LinearLayoutManager(requireContext())
+        val layoutManager = GridLayoutManager(requireContext(), numberOfColumns)
+
+        binding.rvSearchedWord.layoutManager = layoutManager
         binding.rvSearchedWord.adapter = adapter
     }
 
